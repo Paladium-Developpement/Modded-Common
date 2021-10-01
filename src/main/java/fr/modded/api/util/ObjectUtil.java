@@ -10,4 +10,11 @@ public class ObjectUtil {
     public static <T> T cast(Object obj) {
         return (T) obj;
     }
+
+    public static void sleep(long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException ignored) {
+        }
+    }
 }

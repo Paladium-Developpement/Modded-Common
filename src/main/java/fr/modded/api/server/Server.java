@@ -18,6 +18,10 @@ public class Server {
         return serverId;
     }
 
+    public void setServerId(String serverId) {
+        this.serverId = serverId;
+    }
+
     public ServerInfo getServerInfo() {
         return serverInfo;
     }
