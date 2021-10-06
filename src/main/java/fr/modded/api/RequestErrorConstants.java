@@ -14,12 +14,6 @@ public class RequestErrorConstants {
     public static final String BANNED_PLAYER = "BannedPlayerException";
     public static final String INVALID_PLAYER_SESSION = "InvalidPlayerSessionException";
 
-    // Friend
-    public static final String ALREADY_FRIEND = "AlreadyFriendException";
-    public static final String ALREADY_INVITE_FRIEND = "AlreadyInviteFriendException";
-    public static final String INVALID_FRIEND = "InvalidFriendException";
-    public static final String DISABLE_FRIEND = "DisableFriendException";
-
     // Mojang
     public static final String INVALID_CREDENTIALS = "InvalidCredentialsException";
 
@@ -31,7 +25,6 @@ public class RequestErrorConstants {
 
     // Server Whitelist
     public static final String WHITELIST = "WhiteListException";
-    public static final String ALREADY_WHITELIST = "AlreadyWhitelistException";
     public static final String INVITATION = "InvitationException";
 
     /**
