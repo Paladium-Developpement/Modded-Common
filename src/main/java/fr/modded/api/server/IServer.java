@@ -30,11 +30,11 @@ public interface IServer {
 
     LockList<UUID> getWhiteList();
 
-    void addWhitelist(final UUID playerId);
+    void addWhiteList(final UUID playerId);
 
-    void removeWhitelist(final UUID playerId);
+    void removeWhiteList(final UUID playerId);
 
-    boolean isWhitelisted(final UUID playerId);
+    boolean isWhiteListed(final UUID playerId);
 
     LockList<String> getInvitationCodes();
 

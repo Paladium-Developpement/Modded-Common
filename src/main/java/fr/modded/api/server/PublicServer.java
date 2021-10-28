@@ -80,15 +80,15 @@ public class PublicServer implements IServer {
     }
 
     @Override
-    public void addWhitelist(UUID playerId) {
+    public void addWhiteList(UUID playerId) {
     }
 
     @Override
-    public void removeWhitelist(UUID playerId) {
+    public void removeWhiteList(UUID playerId) {
     }
 
     @Override
-    public boolean isWhitelisted(UUID playerId) {
+    public boolean isWhiteListed(UUID playerId) {
         return true;
     }
 

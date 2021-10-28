@@ -97,17 +97,17 @@ public class Server implements IServer {
     }
 
     @Override
-    public void addWhitelist(UUID playerId) {
+    public void addWhiteList(UUID playerId) {
         this.whitelist.add(playerId);
     }
 
     @Override
-    public void removeWhitelist(UUID playerId) {
+    public void removeWhiteList(UUID playerId) {
         this.whitelist.remove(playerId);
     }
 
     @Override
-    public boolean isWhitelisted(UUID playerId) {
+    public boolean isWhiteListed(UUID playerId) {
         return this.whitelist.contains(playerId);
     }
 
