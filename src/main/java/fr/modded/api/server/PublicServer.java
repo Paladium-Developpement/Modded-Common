@@ -6,32 +6,18 @@ import fr.modded.api.util.list.LockList;
 import java.net.InetSocketAddress;
 import java.util.UUID;
 
-public class Server implements IServer {
+public class PublicServer implements IServer {
     private final String serverId;
-    private final UUID playerOwner;
 
     private final ServerInfo serverInfo = new ServerInfo();
-
-    @Exclude
-    private final LockList<UUID> whitelist = new LockList<>();
-    @Exclude
-    private final LockList<String> invitationCodes = new LockList<>();
 
     @Exclude
     private InetSocketAddress address;
     private String host;
     private int port;
 
-    private ServerType serverType;
-    private NetworkType networkType;
-    private ServerState state;
-    private int currentInvitations;
-    private boolean expired;
-    private long expire;
-
-    public Server(String serverId, UUID playerOwner) {
+    public PublicServer(String serverId) {
         this.serverId = serverId;
-        this.playerOwner = playerOwner;
     }
 
     @Override
@@ -53,12 +39,11 @@ public class Server implements IServer {
 
     @Override
     public ServerState getState() {
-        return this.state;
+        return ServerState.OPEN;
     }
 
     @Override
     public void setState(ServerState state) {
-        this.state = state;
     }
 
     @Override
@@ -68,96 +53,83 @@ public class Server implements IServer {
 
     @Override
     public UUID getOwner() {
-        return this.playerOwner;
+        return null;
     }
 
     @Override
     public ServerType getType() {
-        return this.serverType;
+        return null;
     }
 
     @Override
     public void setType(ServerType type) {
-        this.serverType = type;
     }
 
     @Override
     public NetworkType getNetworkType() {
-        return this.networkType;
+        return null;
     }
 
     @Override
     public void setNetworkType(NetworkType type) {
-        this.networkType = type;
     }
 
     @Override
     public LockList<UUID> getWhiteList() {
-        return this.whitelist;
+        return null;
     }
 
     @Override
     public void addWhitelist(UUID playerId) {
-        this.whitelist.add(playerId);
     }
 
     @Override
     public void removeWhitelist(UUID playerId) {
-        this.whitelist.remove(playerId);
     }
 
     @Override
     public boolean isWhitelisted(UUID playerId) {
-        return this.whitelist.contains(playerId);
+        return true;
     }
 
     @Override
     public LockList<String> getInvitationCodes() {
-        return this.invitationCodes;
+        return null;
     }
 
     @Override
     public int getCurrentInvitations() {
-        return this.currentInvitations;
+        return 0;
     }
 
     @Override
     public void setCurrentInvitations(int current) {
-        this.currentInvitations = current;
     }
 
     @Override
     public void incrementInvitations(int amount) {
-        if (this.currentInvitations + amount > this.serverType.getMaxInvitations())
-            return;
-        this.currentInvitations += amount;
     }
 
     @Override
     public void decrementInvitations(int amount) {
-        if (this.currentInvitations - amount <= 0)
-            this.currentInvitations = 0;
-        this.currentInvitations -= amount;
     }
 
     @Override
     public boolean isExpired() {
-        return this.expired;
+        return false;
     }
 
     @Override
     public void setExpired(boolean expired) {
-        this.expired = expired;
     }
 
     @Override
     public long getExpire() {
-        return this.expire;
+        return 0;
     }
 
     @Override
     public void setExpire(long expire) {
-        this.expire = expire;
     }
 
     @Override
