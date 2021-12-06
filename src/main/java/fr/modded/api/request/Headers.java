@@ -1,8 +1,6 @@
 package fr.modded.api.request;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static fr.modded.api.util.ObjectUtil.checkNotNull;

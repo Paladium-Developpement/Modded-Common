@@ -1,14 +1,12 @@
 package fr.modded.api.model.user;
 
-import fr.modded.api.server.ServerType;
-
 import java.util.UUID;
 
 public class PlayerInfoModel {
     private final UUID playerId;
-    private final ServerType rank;
+    private final String rank;
 
-    public PlayerInfoModel(UUID playerId, ServerType rank) {
+    public PlayerInfoModel(UUID playerId, String rank) {
         this.playerId = playerId;
         this.rank = rank;
     }
@@ -17,7 +15,7 @@ public class PlayerInfoModel {
         return playerId;
     }
 
-    public ServerType getRank() {
+    public String getRank() {
         return rank;
     }
 }

@@ -22,16 +22,23 @@ public class Server implements IServer {
     private String host;
     private int port;
 
-    private ServerType serverType;
+    private String serverType;
     private NetworkType networkType;
     private ServerState state;
+
+    private int maxPlayers;
+    private int maxInvitations;
     private int currentInvitations;
+
     private boolean expired;
     private long expire;
 
-    public Server(String serverId, UUID playerOwner) {
-        this.serverId = serverId;
-        this.playerOwner = playerOwner;
+    public Server(String id, UUID owner, ServerType type) {
+        this.serverId = id;
+        this.playerOwner = owner;
+        this.serverType = type.getName();
+        this.maxPlayers = type.maxPlayers;
+        this.maxInvitations = type.maxInvitations;
     }
 
     @Override
@@ -72,12 +79,12 @@ public class Server implements IServer {
     }
 
     @Override
-    public ServerType getType() {
+    public String getType() {
         return this.serverType;
     }
 
     @Override
-    public void setType(ServerType type) {
+    public void setType(String type) {
         this.serverType = type;
     }
 
@@ -128,8 +135,6 @@ public class Server implements IServer {
 
     @Override
     public void incrementInvitations(int amount) {
-        if (this.currentInvitations + amount > this.serverType.getMaxInvitations())
-            return;
         this.currentInvitations += amount;
     }
 

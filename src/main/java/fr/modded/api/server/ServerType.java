@@ -1,22 +1,31 @@
 package fr.modded.api.server;
 
-import java.util.concurrent.TimeUnit;
+public class ServerType {
+    final String name;
+    final int ordinal;
+    final int maxPlayers;
+    final int maxInvitations;
+    final long lastBackupExpireTime;
 
-public enum ServerType {
-    STARTER(2, 1, TimeUnit.DAYS.toMillis(31)),
-    EXPERT(4, 3, TimeUnit.DAYS.toMillis(31 * 3)),
-    PRO(8, 6, TimeUnit.DAYS.toMillis(31 * 12));
+    final int memory;
+    final int disk;
 
-    private final int maxPlayers;
-    private final int maxInvitations;
-    private final long backupExpireTime;
+    public ServerType(Builder builder) {
+        this.name = builder.name;
+        this.ordinal = builder.ordinal;
+        this.maxPlayers = builder.maxPlayers;
+        this.maxInvitations = builder.maxInvitations;
+        this.lastBackupExpireTime = builder.lastBackupExpireTime;
+        this.memory = builder.memory;
+        this.disk = builder.disk;
+    }
 
-    public static final ServerType MAX = PRO;
+    public String getName() {
+        return name;
+    }
 
-    ServerType(int maxPlayers, int maxInvitations, long backupExpireTime) {
-        this.maxPlayers = maxPlayers;
-        this.maxInvitations = maxInvitations;
-        this.backupExpireTime = backupExpireTime;
+    public int getOrdinal() {
+        return ordinal;
     }
 
     public int getMaxPlayers() {
@@ -27,7 +36,37 @@ public enum ServerType {
         return maxInvitations;
     }
 
-    public long getBackupExpireTime() {
-        return backupExpireTime;
+    public long getLastBackupExpireTime() {
+        return lastBackupExpireTime;
+    }
+
+    public int getMemory() {
+        return memory;
+    }
+
+    public int getDisk() {
+        return disk;
+    }
+
+    public static class Builder {
+        String name;
+        int ordinal;
+        int maxPlayers;
+        int maxInvitations;
+        long lastBackupExpireTime;
+
+        int memory;
+        int disk;
+
+        public ServerType create(String name, int ordinal, int maxPlayers, int maxInvitations, long lastBackupExpireTime, int memory, int disk) {
+            this.name = name;
+            this.ordinal = ordinal;
+            this.maxPlayers = maxPlayers;
+            this.maxInvitations = maxInvitations;
+            this.lastBackupExpireTime = lastBackupExpireTime;
+            this.memory = memory;
+            this.disk = disk;
+            return new ServerType(this);
+        }
     }
 }

@@ -20,9 +20,9 @@ public interface IServer {
 
     UUID getOwner();
 
-    ServerType getType();
+    String getType();
 
-    void setType(ServerType type);
+    void setType(String type);
 
     NetworkType getNetworkType();
 

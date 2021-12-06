@@ -57,12 +57,12 @@ public class PublicServer implements IServer {
     }
 
     @Override
-    public ServerType getType() {
+    public String getType() {
         return null;
     }
 
     @Override
-    public void setType(ServerType type) {
+    public void setType(String type) {
     }
 
     @Override
