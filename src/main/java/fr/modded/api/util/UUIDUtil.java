@@ -114,6 +114,9 @@ public class UUIDUtil {
     }
 
     public static String toString(final UUID uuid) {
+        if (uuid == null)
+            return null;
+
         if (USE_JDK_UUID_TO_STRING)
             return uuid.toString();
 

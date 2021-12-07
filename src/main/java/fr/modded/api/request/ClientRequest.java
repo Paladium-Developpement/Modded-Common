@@ -1,9 +1,6 @@
 package fr.modded.api.request;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -22,6 +19,11 @@ public class ClientRequest {
             connection.setRequestProperty("Accept-Charset", "UTF-8");
             connection.setRequestProperty("Content-Type", "application/json;charset=utf-8");
             connection.setRequestProperty("Content-Length", String.valueOf(out.length));
+
+            final DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
+            wr.write(out, 0, out.length);
+            wr.flush();
+            wr.close();
         }
 
         connection.connect();
@@ -29,12 +31,18 @@ public class ClientRequest {
         final Response.Builder response = new Response.Builder();
         response.code(connection.getResponseCode());
 
-        if (connection.getResponseCode() != 200) {
+        if (connection.getResponseCode() == 204) {
             connection.disconnect();
             return response.build();
         }
 
-        final InputStream is = connection.getInputStream();
+        final InputStream is;
+        if (connection.getResponseCode() == 200) {
+            is = connection.getInputStream();
+        } else {
+            is = connection.getErrorStream();
+        }
+
         final BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
         String body = br.readLine();
         try {
@@ -47,7 +55,8 @@ public class ClientRequest {
         while (body != null && body.startsWith("\uFEFF"))
             body = body.substring(1);
 
-        response.body(body);
+        if (body != null)
+            response.body(body);
         return response.build();
     }
 }
